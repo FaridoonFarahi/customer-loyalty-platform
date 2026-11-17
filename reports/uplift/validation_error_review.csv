@@ -1,0 +1,4 @@
+position,households,mean_absolute_error,rmse
+Away from both jumps,341,4.340023836286521,5.5908695779052975
+Near the jump at 15 days (13-16),40,6.726012079334771,7.886964925887696
+Near the jump at 5 days (3-6),119,4.3115422132391,5.158656957430503

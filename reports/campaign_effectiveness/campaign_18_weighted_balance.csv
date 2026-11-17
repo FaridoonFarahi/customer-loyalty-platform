@@ -1,0 +1,5 @@
+feature,unweighted_standardized_difference,weighted_standardized_difference
+sales_before,0.9872880299185233,0.08941716342647796
+active_days_before,1.1177982998770701,0.016570994541593807
+log1p_sales_before,1.1833264226029443,0.0016086285057381885
+log1p_active_days_before,1.3474671934203222,0.003153782490109635

@@ -1,0 +1,10 @@
+{
+  "experiment_name": "customer_loyalty_redemption",
+  "experiment_id": "1",
+  "tracking_uri": "sqlite:////Users/faridoonfarahi/Documents/Personal_Projects/customer_loyalty_platform/mlflow_tracking/mlflow.db",
+  "runs": {
+    "numerical_baseline": "2ad68ac37b5d4e23bbcab853b3b4b849",
+    "selected_logistic_model": "ddd8bfd34b5b4a0d858a2cc5b0b5b359",
+    "xgboost_candidate": "073dde670f5a4c9ea1efee1e8ccef4ec"
+  }
+}

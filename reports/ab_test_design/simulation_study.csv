@@ -1,0 +1,7 @@
+is_simulated,design,analysis,scenario,true_effect,trials,mean_estimate,share_significant,interval_coverage,mean_interval_half_width
+True,Resampled outcomes (notebook 10 recipe),Welch t-test,Planned effect,27.42963730984789,2000,26.91018700160129,0.539,0.952,25.7608793486235
+True,Resampled outcomes (notebook 10 recipe),Welch t-test,No effect,0.0,2000,-0.3030187510008022,0.0615,0.9385,25.736179239707138
+True,"Real household pairs, random assignment",Welch t-test,Planned effect,27.42963730984789,2000,26.979068550840683,0.546,0.95,25.77349699045683
+True,"Real household pairs, random assignment",Baseline-adjusted (CUPED),Planned effect,27.42963730984789,2000,27.323268427262207,0.978,0.951,13.384918702611442
+True,"Real household pairs, random assignment",Welch t-test,No effect,0.0,2000,-0.2028166052842273,0.044,0.956,25.773474877171918
+True,"Real household pairs, random assignment",Baseline-adjusted (CUPED),No effect,0.0,2000,-0.01872944002905055,0.0505,0.9495,13.384666594528271

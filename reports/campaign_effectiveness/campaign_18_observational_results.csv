@@ -1,0 +1,3 @@
+campaign_id,method,population,sales_change_contrast,ci_lower,ci_upper,interpretation,bootstrap_samples
+18,Unweighted difference in changes,Full study cohort,14.918233947282491,0.7367044306825754,29.249669093527842,Observational association,2000
+18,Overlap-weighted difference in changes,Overlap-weighted study cohort,47.4555255078123,30.949290086179914,64.429089381388,Observational association,2000

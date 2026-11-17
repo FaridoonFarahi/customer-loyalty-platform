@@ -1,0 +1,2 @@
+outcome_window_days,baseline_mean,assumed_standard_deviation,alpha,target_power,planned_relative_difference,planned_absolute_difference,required_per_group,required_total,available_per_group,power_with_available_sample,detectable_absolute_difference,detectable_relative_difference
+56,274.2963730984789,328.4568109215352,0.05,0.8,0.1,27.42963730984789,2252,4504,1249,0.5502248433941606,36.83685226329716,0.13429580510738964

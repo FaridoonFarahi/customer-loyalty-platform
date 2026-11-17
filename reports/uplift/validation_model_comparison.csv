@@ -1,0 +1,4 @@
+model,effect_rmse
+Constant training-group difference,14.217230407121187
+Ridge T-learner,13.238516346979884
+Ridge-plus-trees T-learner,5.712072023335055

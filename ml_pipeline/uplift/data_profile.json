@@ -1,0 +1,96 @@
+{
+  "schema_version": "1",
+  "created": "2026-11-17",
+  "shape": {
+    "n_rows": 2498,
+    "n_cols": 5,
+    "memory_mb": 0.1,
+    "sampled": false,
+    "sample_rows": null
+  },
+  "target": {
+    "name": "simulated_sales_56d",
+    "task": "regression",
+    "n_classes": null,
+    "class_balance": null,
+    "minority_frac": null
+  },
+  "columns": {
+    "household_key": {
+      "kind": "id",
+      "missing_frac": 0.0,
+      "n_unique": 2498,
+      "unique_frac": 1.0
+    },
+    "sales_before": {
+      "kind": "numeric",
+      "missing_frac": 0.0,
+      "n_unique": 2183,
+      "unique_frac": 0.8739,
+      "min": 0.0,
+      "median": 162.56,
+      "max": 4093.57,
+      "skew": 2.4974,
+      "outlier_frac": 0.0492
+    },
+    "active_days_before": {
+      "kind": "numeric",
+      "missing_frac": 0.0,
+      "n_unique": 49,
+      "unique_frac": 0.0196,
+      "min": 0.0,
+      "median": 6.0,
+      "max": 51.0,
+      "skew": 1.7316,
+      "outlier_frac": 0.0384
+    },
+    "treatment": {
+      "kind": "numeric",
+      "missing_frac": 0.0,
+      "n_unique": 2,
+      "unique_frac": 0.0008,
+      "min": 0.0,
+      "median": 0.5,
+      "max": 1.0,
+      "skew": 0.0,
+      "outlier_frac": 0.0
+    },
+    "simulated_sales_56d": {
+      "kind": "numeric",
+      "missing_frac": 0.0,
+      "n_unique": 2498,
+      "unique_frac": 1.0,
+      "min": 1.0359,
+      "median": 210.4311,
+      "max": 3540.881,
+      "skew": 2.2193,
+      "outlier_frac": 0.0452
+    }
+  },
+  "duplicates": {
+    "exact_row_frac": 0.0
+  },
+  "constant_columns": [],
+  "high_cardinality_categoricals": [],
+  "datetime_columns": [],
+  "time_col": null,
+  "group_col": "household_key",
+  "entity_candidates": [],
+  "leakage_suspects": [
+    {
+      "column": "sales_before",
+      "reason": "|corr| with target = 0.99"
+    }
+  ],
+  "traits": {
+    "n_rows": 2498,
+    "n_features": 4,
+    "task": "regression",
+    "minority_frac": null,
+    "has_datetime": false,
+    "has_groups": true,
+    "small_data": true,
+    "imbalanced": false,
+    "high_card_categoricals": []
+  }
+}

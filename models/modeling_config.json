@@ -1,0 +1,26 @@
+{
+  "target": "redeemed",
+  "numeric_features": [
+    "baskets_90d",
+    "retailer_sales_90d",
+    "recency_days_90d",
+    "has_transactions_90d",
+    "avg_retailer_sales_per_basket_90d",
+    "active_days_90d"
+  ],
+  "campaign_type_features": [
+    "baskets_90d",
+    "retailer_sales_90d",
+    "recency_days_90d",
+    "has_transactions_90d",
+    "avg_retailer_sales_per_basket_90d",
+    "active_days_90d",
+    "DESCRIPTION"
+  ],
+  "history_window_days": 90,
+  "eligible_campaign_end_day_cutoff": 704,
+  "cutoff_note": "Conservative modeling choice, not a confirmed collection end date.",
+  "validation_start_day": 463,
+  "test_start_day": 587,
+  "exclude_boundary_crossing_campaigns": true
+}

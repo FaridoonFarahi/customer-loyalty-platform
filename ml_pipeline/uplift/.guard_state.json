@@ -1,0 +1,8 @@
+{
+  "test_fingerprint": "3b723d2e9f6886403f425afab171e968a9289d951873e467397cedad5be33e69",
+  "n_test": 500,
+  "test_touches": 1,
+  "duplicates_dropped": 0,
+  "split": "group",
+  "created": "2026-11-17"
+}

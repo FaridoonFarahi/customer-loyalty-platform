@@ -1,0 +1,4 @@
+segment,households,median_recency_days,median_active_days,median_retailer_sales
+Higher recent activity,1430,3.0,16.0,585.08
+Lower recent activity,896,20.5,4.0,102.785
+No recorded activity in last 90 days,174,,0.0,0.0

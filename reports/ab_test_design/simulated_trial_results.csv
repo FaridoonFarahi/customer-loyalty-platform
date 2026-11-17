@@ -1,0 +1,2 @@
+is_simulated,imposed_effect,estimated_effect,ci_lower,ci_upper,p_value,alpha,reject_zero_effect,campaign_households,holdout_households,assignment_seed,outcome_seed
+True,27.42963730984789,6.882903923138542,-19.0324650442046,32.798272890481684,0.602549285213865,0.05,False,1249,1249,42,2026

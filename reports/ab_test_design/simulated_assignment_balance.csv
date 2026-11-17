@@ -1,0 +1,3 @@
+assigned_group,households,mean_baseline_sales,median_baseline_sales,baseline_sales_sd
+campaign,1249,274.62640512409934,168.04,318.1400441890864
+holdout,1249,273.96634107285837,153.42000000000002,338.58661072464463
