@@ -7,7 +7,7 @@ streamlit_testing = pytest.importorskip("streamlit.testing.v1")
 
 PAGES = [
     "Overview", "Who to target", "Score a household",
-    "Plan an experiment", "Campaign effect and uplift", "Model and pipeline",
+    "Plan an experiment", "Campaign effect and uplift", "Model and pipeline", "Monitoring",
 ]
 
 

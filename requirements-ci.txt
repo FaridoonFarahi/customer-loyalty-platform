@@ -1,0 +1,14 @@
+# What the tests need. Versions match requirements.txt, so the saved model loads.
+duckdb==2.0.0
+fastapi==0.163.1
+httpx2==2.16.0
+joblib==1.6.0
+numpy==2.5.5
+pandas==3.1.1
+pydantic==2.14.3
+pytest==9.2.0
+ruff==0.17.5
+scikit-learn==1.9.1
+statsmodels==0.15.0
+streamlit==1.67.0
+xgboost==3.4.1

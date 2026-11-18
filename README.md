@@ -1,5 +1,7 @@
 # Customer Loyalty and Marketing Optimization
 
+![tests](https://github.com/FaridoonFarahi/customer-loyalty-platform/actions/workflows/ci.yml/badge.svg)
+
 A portfolio project on retail marketing data. It asks five questions a marketing team would ask:
 
 1. Which households are likely to redeem a campaign coupon?
@@ -118,7 +120,7 @@ The redemption model also exists as code that runs from the raw files with one c
 
 ```bash
 python -m src.pipeline      # raw CSV files -> features -> split -> train -> validate -> MLflow -> saved model
-python -m pytest            # 34 tests
+python -m pytest            # 43 tests
 python -m src.predict --start-day 712 --campaign-type TypeA --top-share 0.2
 ```
 
@@ -143,7 +145,7 @@ python -m src.predict --start-day 712 --campaign-type TypeA --top-share 0.2
 | Batch | `python -m src.predict --start-day 712 --campaign-type TypeA --top-share 0.2` | Scores all 2,500 households for a planned campaign and writes a ranked contact list |
 | Online | `uvicorn src.api:app` | A FastAPI service. `POST /predict` returns redemption probabilities, `GET /health` reports the loaded model. Interactive docs at `/docs`. |
 | Container | `docker build -t loyalty-scoring .` then `docker run -p 8000:8000 loyalty-scoring` | The same service with only the eight packages it needs (`requirements-serve.txt`) |
-| App | `streamlit run streamlit_app.py` | Six pages: results, a targeting slider, live scoring of a household, an experiment planner, campaign effect and uplift, and model details |
+| App | `streamlit run streamlit_app.py` | Seven pages: results, a targeting slider, live scoring of a household, an experiment planner, campaign effect and uplift, model details, and monitoring |
 
 The service checks its input. It refuses unknown campaign types, negative counts, more active days than the 90-day window holds, and histories that contradict themselves. One test confirms that the service and the batch scorer return the same probability for the same household.
 
@@ -155,6 +157,24 @@ curl -X POST http://127.0.0.1:8000/predict -H "Content-Type: application/json" \
 ```
 
 The app trains nothing. It reads the saved tables in `reports/` and the saved model.
+
+## 8. Monitoring, retraining, and continuous integration
+
+```bash
+python -m src.monitor
+```
+
+| Check | Rule for action | Result |
+|---|---|---|
+| Input drift against the training campaigns (PSI) | 0.25 or more on any feature | Stable. Largest value 0.040. |
+| Predicted against observed redemption, by campaign | A gap over 5 points and over two standard errors | Flagged in 4 of 7 later campaigns, always under-predicting (campaign 18: 18.9% observed, 12.7% predicted) |
+| Ranking inside a campaign (ROC-AUC) | More than 0.05 below the validation level of 0.702 | Campaign 18 holds at 0.681 |
+
+**The rule says retrain.** The model still ranks households usefully, but redemption rose over time and its probabilities are now too low. The retraining steps are written down in `docs/monitoring_and_retraining.md`. They have not been run, because the later campaigns are the only held-out data and training on them would leave nothing to check a new model against.
+
+**A selection warning.** The model was trained only on households the retailer chose to target, who were heavier shoppers. Scoring all 2,500 households is an extrapolation for lighter shoppers (PSI of 0.41 to 0.63 on four features). A campaign sent to a random sample would fix this, which is what the A/B test design proposes.
+
+**Continuous integration.** GitHub Actions runs the style check and the tests on every push (`.github/workflows/ci.yml`). The raw data is not in the repository, so the three tests that need it are skipped there and the other 40 run.
 
 ## Limits
 
@@ -172,10 +192,11 @@ The app trains nothing. It reads the saved tables in `reports/` and the saved mo
 | `reports/` | Saved tables and charts |
 | `models/` | Fitted pipelines and the modeling configuration |
 | `ml_pipeline/` | Test-set guard, plus a ledger and figures for the uplift and redemption pipelines |
-| `src/` | The redemption-model pipeline (features, training, MLflow, scoring) and the uplift final-test script |
-| `tests/` | Feature, leakage, split, scoring, service, and app tests |
+| `src/` | The redemption-model pipeline (features, training, MLflow, scoring, service, monitoring) and the uplift final-test script |
+| `tests/` | Feature, leakage, split, scoring, service, app, and monitoring tests |
 | `streamlit_app.py` | The app |
 | `Dockerfile`, `requirements-serve.txt` | Container for the scoring service |
+| `.github/workflows/ci.yml`, `requirements-ci.txt` | Tests on every push |
 | `data/` | Not in the repository (see below) |
 
 | Notebook | Step |
@@ -207,7 +228,7 @@ The app trains nothing. It reads the saved tables in `reports/` and the saved mo
 
 ## Tools
 
-Python, DuckDB (SQL), pandas, scikit-learn, XGBoost, MLflow (tracking and Model Registry), FastAPI, Docker, Streamlit, pytest, ruff, SciPy, statsmodels, matplotlib.
+Python, DuckDB (SQL), pandas, scikit-learn, XGBoost, MLflow (tracking and Model Registry), FastAPI, Docker, Streamlit, GitHub Actions, pytest, ruff, SciPy, statsmodels, matplotlib.
 
 ## Data source
 

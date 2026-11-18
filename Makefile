@@ -10,6 +10,9 @@ lint:
 score:
 	python -m src.predict --start-day 712 --campaign-type TypeA --top-share 0.2
 
+monitor:
+	python -m src.monitor
+
 api:
 	uvicorn src.api:app --reload
 
@@ -22,4 +25,4 @@ docker:
 mlflow-ui:
 	mlflow ui --backend-store-uri sqlite:///mlflow_tracking/mlflow.db
 
-.PHONY: pipeline test lint score api app docker mlflow-ui
+.PHONY: pipeline test lint score monitor api app docker mlflow-ui

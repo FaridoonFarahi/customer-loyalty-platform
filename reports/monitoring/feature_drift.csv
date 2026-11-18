@@ -1,0 +1,19 @@
+period,feature,psi,status,reference_median,period_median
+validation campaigns (days 463-586),baskets_90d,0.023819977753599175,stable,20.0,21.0
+validation campaigns (days 463-586),retailer_sales_90d,0.01729299637208345,stable,644.96,714.0300000000002
+validation campaigns (days 463-586),recency_days_90d,0.0206777573326392,stable,3.0,3.0
+validation campaigns (days 463-586),has_transactions_90d,0.0,stable,1.0,1.0
+validation campaigns (days 463-586),avg_retailer_sales_per_basket_90d,0.0051641808726428035,stable,30.5371875,31.1553125
+validation campaigns (days 463-586),active_days_90d,0.02082099214297893,stable,18.0,19.0
+later campaigns (day 587 on),baskets_90d,0.033957829863275085,stable,20.0,22.0
+later campaigns (day 587 on),retailer_sales_90d,0.04020540846056813,stable,644.96,746.21
+later campaigns (day 587 on),recency_days_90d,0.0047818556647726,stable,3.0,3.0
+later campaigns (day 587 on),has_transactions_90d,0.0,stable,1.0,1.0
+later campaigns (day 587 on),avg_retailer_sales_per_basket_90d,0.014413470335025142,stable,30.5371875,32.25941176470588
+later campaigns (day 587 on),active_days_90d,0.0318630969439166,stable,18.0,19.0
+"planned TypeA campaign, all households, day 712",baskets_90d,0.6244270014487577,act,20.0,10.0
+"planned TypeA campaign, all households, day 712",retailer_sales_90d,0.5727903285138324,act,644.96,288.395
+"planned TypeA campaign, all households, day 712",recency_days_90d,0.40969566380108924,act,3.0,6.0
+"planned TypeA campaign, all households, day 712",has_transactions_90d,0.0,stable,1.0,1.0
+"planned TypeA campaign, all households, day 712",avg_retailer_sales_per_basket_90d,0.19777767085795542,watch,30.5371875,28.672182539682545
+"planned TypeA campaign, all households, day 712",active_days_90d,0.6255282181082751,act,18.0,9.0

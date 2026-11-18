@@ -1,0 +1,17 @@
+{
+  "recommendation": "retrain",
+  "reasons": [
+    "predicted and observed redemption differ by more than 5% in campaigns 18, 19, 23, 25"
+  ],
+  "features_to_watch": [],
+  "warnings": [
+    "the planned scoring population differs strongly from the training population on active_days_90d, baskets_90d, recency_days_90d, retailer_sales_90d. The model was trained only on households the retailer chose to target, so scores for all households are an extrapolation."
+  ],
+  "reference_within_campaign_auc": 0.7017720405627367,
+  "thresholds": {
+    "psi_watch": 0.1,
+    "psi_act": 0.25,
+    "calibration_gap_act": 0.05,
+    "auc_drop_act": 0.05
+  }
+}

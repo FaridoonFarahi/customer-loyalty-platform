@@ -308,6 +308,38 @@ def page_model() -> None:
     )})
 
 
+def page_monitoring() -> None:
+    st.title("Monitoring")
+    decision_path = REPORTS / "monitoring" / "decision.json"
+    feature_drift = read_csv("monitoring/feature_drift.csv")
+    accuracy = read_csv("monitoring/accuracy_by_campaign.csv")
+    if not decision_path.is_file() or feature_drift is None:
+        return missing("The monitoring report (`python -m src.monitor`)")
+    decision = json.loads(decision_path.read_text(encoding="utf-8"))
+
+    st.metric("Recommendation", decision["recommendation"].capitalize())
+    for reason in decision["reasons"]:
+        st.error(reason.capitalize() + ".")
+    for warning in decision["warnings"]:
+        st.warning(warning[0].upper() + warning[1:])
+
+    st.subheader("Input drift against the training campaigns")
+    st.write("Population stability index (PSI). Under 0.10 is stable, 0.10 to 0.25 is worth watching, 0.25 or more calls for action.")
+    st.dataframe(
+        feature_drift.pivot(index="feature", columns="period", values="psi").round(3),
+        width="stretch",
+    )
+    if accuracy is not None:
+        st.subheader("Predicted and observed redemption by campaign")
+        chart = accuracy.assign(campaign=accuracy["CAMPAIGN"].astype(str)).set_index("campaign")
+        st.bar_chart(chart[["observed_rate", "mean_predicted"]], stack=False)
+        st.dataframe(
+            accuracy[["CAMPAIGN", "examples", "redeemers", "observed_rate", "mean_predicted", "calibration_gap", "roc_auc", "calibration_flag"]].round(3),
+            hide_index=True, width="stretch",
+        )
+    st.caption("The rules and the retraining steps are in docs/monitoring_and_retraining.md.")
+
+
 PAGES = {
     "Overview": page_overview,
     "Who to target": page_targeting,
@@ -315,6 +347,7 @@ PAGES = {
     "Plan an experiment": page_experiment,
     "Campaign effect and uplift": page_effects,
     "Model and pipeline": page_model,
+    "Monitoring": page_monitoring,
 }
 
 choice = st.sidebar.radio("Page", list(PAGES))

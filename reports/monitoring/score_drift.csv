@@ -1,0 +1,4 @@
+period,households_or_pairs,score_psi,status,campaign_type_psi,mean_predicted_probability
+validation campaigns (days 463-586),1584,0.014644901413481782,stable,0.22386091933395139,0.10901477108346458
+later campaigns (day 587 on),2218,0.05866237523123652,stable,0.1961417799587911,0.09394524455209327
+"planned TypeA campaign, all households, day 712",2500,0.09060169364329164,stable,2.3222669957689144,0.0956349630442423
