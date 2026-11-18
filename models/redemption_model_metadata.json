@@ -1,0 +1,62 @@
+{
+  "trained_at_utc": "2026-11-18T00:53:54Z",
+  "selected_model": "logistic_with_campaign_type",
+  "model_features": [
+    "baskets_90d",
+    "retailer_sales_90d",
+    "recency_days_90d",
+    "has_transactions_90d",
+    "avg_retailer_sales_per_basket_90d",
+    "active_days_90d",
+    "DESCRIPTION"
+  ],
+  "target": "redeemed",
+  "history_window_days": 90,
+  "validation_start_day": 463,
+  "test_start_day": 587,
+  "modeling_rows": 7091,
+  "data_fingerprint": "036ee509818b57ae",
+  "split_examples": {
+    "train": 2499,
+    "validation": 1584,
+    "test": 2218
+  },
+  "split_campaigns": {
+    "train": 13,
+    "validation": 4,
+    "test": 7
+  },
+  "training_redemption_rate": 0.10604241696678672,
+  "validation_metrics": {
+    "logistic_numeric_baseline": {
+      "roc_auc": 0.6662075827916034,
+      "average_precision": 0.21454148790455774,
+      "brier_score": 0.11856898033410258
+    },
+    "logistic_with_campaign_type": {
+      "roc_auc": 0.7408724131227697,
+      "average_precision": 0.28319949182518267,
+      "brier_score": 0.1138398336040703
+    },
+    "xgboost_with_campaign_type": {
+      "roc_auc": 0.7059073551167534,
+      "average_precision": 0.26009967555648206,
+      "brier_score": 0.11492261290550232
+    }
+  },
+  "validation_constant_baseline_brier": 0.12216991972192376,
+  "mlflow_run_ids": {
+    "logistic_numeric_baseline": "a5b26163b2994d52b823053d01fe6338",
+    "logistic_with_campaign_type": "c44f5e2d02d94f8ead9212bc58e5562e",
+    "xgboost_with_campaign_type": "a8bada46c836420aa628d3d5966634a1"
+  },
+  "mlflow_registered_model": "customer_loyalty_redemption",
+  "mlflow_registered_version": 1,
+  "package_versions": {
+    "python": "3.12.14",
+    "pandas": "3.1.1",
+    "duckdb": "2.0.0",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.4.1"
+  }
+}

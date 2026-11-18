@@ -112,6 +112,50 @@ If the campaign went to the 40% of validation households with the highest estima
 
 The effect pattern was written by hand, so this shows the method works on a pattern of this kind. It says nothing about how real households respond. Details: `docs/uplift_modeling.md`.
 
+## 6. Runnable pipeline, tests, and model registry
+
+The redemption model also exists as code that runs from the raw files with one command. It uses the same features, split, and settings as the notebooks, and it does not choose a model.
+
+```bash
+python -m src.pipeline      # raw CSV files -> features -> split -> train -> validate -> MLflow -> saved model
+python -m pytest            # 34 tests
+python -m src.predict --start-day 712 --campaign-type TypeA --top-share 0.2
+```
+
+| Step | What it does | Code |
+|---|---|---|
+| Features | One query builds every feature from the 90 days before each campaign. Training and scoring use the same query. | `src/features.py` |
+| Split and train | Split by time, fit the three candidates, score them on validation campaigns | `src/train.py` |
+| Tracking and registry | One MLflow run per candidate. The selected model is registered and marked `champion`. | `src/tracking.py` |
+| Batch scoring | Scores every household for a planned campaign and writes a ranked contact list | `src/predict.py` |
+| Orchestration | Runs the steps in order and saves the model with its metadata | `src/pipeline.py` |
+
+**The pipeline reproduces the notebooks.** Its modeling table equals the notebook table row for row (7,091 rows), and the logistic regression validation metrics match to six decimal places. Both checks are tests.
+
+**Tests.** Hand-made data with known answers checks the feature window, the label window, and the split. Two leakage tests add or delete purchases on and after a campaign's start day and require that no feature changes. Tests that need the real data are skipped when `data/raw/` is absent.
+
+**The pipeline stops at validation.** The held-out test campaigns were scored once, in notebook 06, and the pipeline does not score them again.
+
+## 7. Deployment: scoring service, container, and app
+
+| Form | Command | What it is |
+|---|---|---|
+| Batch | `python -m src.predict --start-day 712 --campaign-type TypeA --top-share 0.2` | Scores all 2,500 households for a planned campaign and writes a ranked contact list |
+| Online | `uvicorn src.api:app` | A FastAPI service. `POST /predict` returns redemption probabilities, `GET /health` reports the loaded model. Interactive docs at `/docs`. |
+| Container | `docker build -t loyalty-scoring .` then `docker run -p 8000:8000 loyalty-scoring` | The same service with only the eight packages it needs (`requirements-serve.txt`) |
+| App | `streamlit run streamlit_app.py` | Six pages: results, a targeting slider, live scoring of a household, an experiment planner, campaign effect and uplift, and model details |
+
+The service checks its input. It refuses unknown campaign types, negative counts, more active days than the 90-day window holds, and histories that contradict themselves. One test confirms that the service and the batch scorer return the same probability for the same household.
+
+Example request:
+
+```bash
+curl -X POST http://127.0.0.1:8000/predict -H "Content-Type: application/json" \
+  -d '{"households": [{"household_key": 1, "campaign_type": "TypeA", "baskets_90d": 30, "retailer_sales_90d": 900, "active_days_90d": 25, "recency_days_90d": 2}]}'
+```
+
+The app trains nothing. It reads the saved tables in `reports/` and the saved model.
+
 ## Limits
 
 - The redemption model uses six purchase-history features. It has no prior-redemption or product-level features yet.
@@ -127,8 +171,11 @@ The effect pattern was written by hand, so this shows the method works on a patt
 | `docs/` | Written decisions and results for each step |
 | `reports/` | Saved tables and charts |
 | `models/` | Fitted pipelines and the modeling configuration |
-| `ml_pipeline/` | Split and single-use test-set guard for the uplift step |
-| `src/` | `uplift_final_test.py`, the single final test run from notebook 11 |
+| `ml_pipeline/` | Test-set guard, plus a ledger and figures for the uplift and redemption pipelines |
+| `src/` | The redemption-model pipeline (features, training, MLflow, scoring) and the uplift final-test script |
+| `tests/` | Feature, leakage, split, scoring, service, and app tests |
+| `streamlit_app.py` | The app |
+| `Dockerfile`, `requirements-serve.txt` | Container for the scoring service |
 | `data/` | Not in the repository (see below) |
 
 | Notebook | Step |
@@ -156,11 +203,11 @@ The effect pattern was written by hand, so this shows the method works on a patt
    pip install -r requirements.txt
    ```
 
-3. Run the notebooks in number order.
+3. Run the notebooks in number order, or run the redemption model alone with `python -m src.pipeline`.
 
 ## Tools
 
-Python, DuckDB (SQL), pandas, scikit-learn, XGBoost, MLflow, SciPy, statsmodels, matplotlib.
+Python, DuckDB (SQL), pandas, scikit-learn, XGBoost, MLflow (tracking and Model Registry), FastAPI, Docker, Streamlit, pytest, ruff, SciPy, statsmodels, matplotlib.
 
 ## Data source
 

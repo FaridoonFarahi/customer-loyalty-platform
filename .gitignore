@@ -16,3 +16,11 @@ mlruns/
 # Secrets and OS clutter
 .env
 .DS_Store
+
+# Tool caches
+.pytest_cache/
+.ruff_cache/
+
+# Folders created by AI coding tools
+.agents/
+.claude/

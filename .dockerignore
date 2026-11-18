@@ -1,0 +1,14 @@
+.venv/
+.git/
+data/
+dunnhumby_The-Complete-Journey/
+*.zip
+mlflow_tracking/
+notebooks/
+reports/
+docs/
+tests/
+ml_pipeline/
+__pycache__/
+.pytest_cache/
+.ruff_cache/

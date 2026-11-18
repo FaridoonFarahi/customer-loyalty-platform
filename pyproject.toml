@@ -1,0 +1,19 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
+filterwarnings = ["ignore::DeprecationWarning", "ignore::FutureWarning"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+extend-exclude = ["notebooks", "ml_pipeline", "dunnhumby_The-Complete-Journey"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+# Runs inside the notebook with `%run -i`, so its variables come from the notebook.
+"src/uplift_final_test.py" = ["F821", "E501"]
+# Long user-facing sentences read better on one line.
+"streamlit_app.py" = ["E501"]

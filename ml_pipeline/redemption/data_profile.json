@@ -1,0 +1,166 @@
+{
+  "schema_version": "1",
+  "created": "2026-11-17",
+  "shape": {
+    "n_rows": 7091,
+    "n_cols": 11,
+    "memory_mb": 0.64,
+    "sampled": false,
+    "sample_rows": null
+  },
+  "target": {
+    "name": "redeemed",
+    "task": "binary",
+    "n_classes": 2,
+    "class_balance": {
+      "0": 0.8759,
+      "1": 0.1241
+    },
+    "minority_frac": 0.1241
+  },
+  "columns": {
+    "household_key": {
+      "kind": "numeric",
+      "missing_frac": 0.0,
+      "n_unique": 1578,
+      "unique_frac": 0.2225,
+      "min": 1.0,
+      "median": 1260.0,
+      "max": 2500.0,
+      "skew": -0.0153,
+      "outlier_frac": 0.0
+    },
+    "CAMPAIGN": {
+      "kind": "numeric",
+      "missing_frac": 0.0,
+      "n_unique": 28,
+      "unique_frac": 0.0039,
+      "min": 1.0,
+      "median": 14.0,
+      "max": 30.0,
+      "skew": 0.3855,
+      "outlier_frac": 0.0
+    },
+    "DESCRIPTION": {
+      "kind": "categorical",
+      "missing_frac": 0.0,
+      "n_unique": 3,
+      "unique_frac": 0.0004,
+      "n_levels": 3,
+      "top": {
+        "TypeA": 0.5611,
+        "TypeB": 0.3603,
+        "TypeC": 0.0786
+      }
+    },
+    "START_DAY": {
+      "kind": "numeric",
+      "missing_frac": 0.0,
+      "n_unique": 26,
+      "unique_frac": 0.0037,
+      "min": 224.0,
+      "median": 504.0,
+      "max": 659.0,
+      "skew": -0.527,
+      "outlier_frac": 0.0
+    },
+    "baskets_90d": {
+      "kind": "numeric",
+      "missing_frac": 0.0,
+      "n_unique": 173,
+      "unique_frac": 0.0244,
+      "min": 0.0,
+      "median": 21.0,
+      "max": 257.0,
+      "skew": 3.0993,
+      "outlier_frac": 0.054
+    },
+    "retailer_sales_90d": {
+      "kind": "numeric",
+      "missing_frac": 0.0,
+      "n_unique": 7036,
+      "unique_frac": 0.9922,
+      "min": 0.0,
+      "median": 712.18,
+      "max": 4104.61,
+      "skew": 1.3073,
+      "outlier_frac": 0.0388
+    },
+    "recency_days_90d": {
+      "kind": "numeric",
+      "missing_frac": 0.0038,
+      "n_unique": 77,
+      "unique_frac": 0.0109,
+      "min": 1.0,
+      "median": 3.0,
+      "max": 89.0,
+      "skew": 4.36,
+      "outlier_frac": 0.0923
+    },
+    "has_transactions_90d": {
+      "kind": "numeric",
+      "missing_frac": 0.0,
+      "n_unique": 2,
+      "unique_frac": 0.0003,
+      "min": 0.0,
+      "median": 1.0,
+      "max": 1.0,
+      "skew": -16.1166,
+      "outlier_frac": 0.0
+    },
+    "avg_retailer_sales_per_basket_90d": {
+      "kind": "numeric",
+      "missing_frac": 0.0038,
+      "n_unique": 7049,
+      "unique_frac": 0.9941,
+      "min": 1.88,
+      "median": 31.5943,
+      "max": 322.755,
+      "skew": 2.1812,
+      "outlier_frac": 0.045
+    },
+    "active_days_90d": {
+      "kind": "numeric",
+      "missing_frac": 0.0,
+      "n_unique": 82,
+      "unique_frac": 0.0116,
+      "min": 0.0,
+      "median": 19.0,
+      "max": 82.0,
+      "skew": 1.2754,
+      "outlier_frac": 0.0347
+    },
+    "redeemed": {
+      "kind": "numeric",
+      "missing_frac": 0.0,
+      "n_unique": 2,
+      "unique_frac": 0.0003,
+      "min": 0.0,
+      "median": 0.0,
+      "max": 1.0,
+      "skew": 2.2808,
+      "outlier_frac": 0.0
+    }
+  },
+  "duplicates": {
+    "exact_row_frac": 0.0
+  },
+  "constant_columns": [],
+  "high_cardinality_categoricals": [],
+  "datetime_columns": [],
+  "time_col": "START_DAY",
+  "group_col": "household_key",
+  "entity_candidates": [],
+  "leakage_suspects": [],
+  "traits": {
+    "n_rows": 7091,
+    "n_features": 10,
+    "task": "binary",
+    "minority_frac": 0.1241,
+    "has_datetime": true,
+    "has_groups": true,
+    "small_data": false,
+    "imbalanced": false,
+    "high_card_categoricals": []
+  }
+}
